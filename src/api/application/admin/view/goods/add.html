@@ -1,0 +1,34 @@
+{include file="public/header"}
+<div class="container">
+	<h2>添加商品表单</h2>
+	<form action="{:url('music/save')}" enctype="multipart/form-data" method="post">
+		<div class="form-group">
+			<label for="">商品名称</label>
+			<input type="text" class="form-control" name="musicName">
+		</div>
+		<div class="form-group">
+		<label for="">所属分类</label>
+		<select name="cateID" >
+			<option value="">请选择</option>
+			{foreach $cateList as $item}
+			<option value="{$item.cateID}">{$item.cateName}</option>
+			{/foreach}
+
+		</select>
+	</div>
+		<div class="form-group">
+			<label for="">图片</label>
+			<input type="file"  name="mp3Src">
+		</div>
+		<div class="form-group">
+			<label for="">歌词</label>
+			<textarea name="word" id=""  style="width: 1146px; height: 190px;"></textarea>
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn-success btn" value="保存">
+		</div>
+	</form>
+</div>
+
+
+{include file="public/footer"}

@@ -1,0 +1,41 @@
+{include file="public/header"}
+<div class="container">
+	<h2>修改歌曲表单</h2>
+	<form action="{:url('update')}" enctype="multipart/form-data" method="post">
+		<div class="form-group">
+			<label for="">歌曲名称</label>
+			<input type="text" class="form-control" name="musicName" value='{$musicList[0]['musicName']}'>
+		</div>
+		<div class="form-group">
+		<label for="">所属歌手</label>
+		<select name="singerID" >
+			<!-- <option value="">请选择</option> -->
+			{foreach $singerList as $item}
+			<option {if condition="$musicList[0]['singerID'] == $item['singerID']" } selected {/if} value="{$item.singerID}">{$item.singerName}</option>
+			{/foreach}
+
+		</select>
+		</div>
+		<div class="form-group">
+			<label for="">mp3</label>
+			<input type="file"  name="mp3Src" value='{$musicList[0]['mp3Src']}'>
+			<input type="hidden"  name="mp3Hide" value='{$musicList[0]['mp3Src']}'>
+		</div>
+		<div class="form-group">
+			<label for="">虾米歌曲</label>
+			<embed src="http://www.xiami.com/widget/0_{$musicList[0]['songID']}/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
+		</div>
+		<div class="form-group">
+			<label for="">歌词</label>
+			<textarea name="word" id=""  style="width: 1146px; height: 190px;" value='{$musicList[0]['word']}'>{$musicList[0]['word']}
+			</textarea>
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn-success btn" value="保存">
+			<input type="hidden"  name="id" value='{$musicList[0]['musicID']}'>
+		</div>
+	</form>
+</div>
+
+
+{include file="public/footer"}

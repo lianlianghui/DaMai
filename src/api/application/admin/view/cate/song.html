@@ -1,0 +1,41 @@
+{include file="public/header"}
+<div class="container">
+<h2>歌曲列表管理</h2>
+ <p>
+ 	<img src="{$singerList['singerImg']}" style="width:350px;"></img>
+ </p>
+<!-- {:url('add')}  跳转至当前应用下的当前控制器里面的add操作
+{:url('music/add')}  跳转至当前应用下的music控制器里面的add操作
+{:url('应用名称/控制器/操作')}  跳转至指定的应用下的music控制器里面的add操作 -->
+<a href="{:url('music/add')}" class="btn btn-success">添加歌曲</a>
+<a href="{:url('music/index')}" class="btn btn-success">返回音乐列表</a>
+<a href="{:url('singer/index')}" class="btn btn-success">返回歌手列表</a>
+<!-- <a href="{:url('index/cartnoon/index')}" class="btn btn-success">是浏览漫画api</a>
+ -->
+
+<table class="table">
+	<tr>
+		<th>ID</th>
+		<th>歌曲名称</th>
+		<th>mp3</th>
+		<th>歌手</th>
+		<th>操作</th>
+	</tr>
+
+{foreach $musicList as $value}
+	<tr>
+	
+		<td>{$value.musicID}</td>
+		<td>{$value['musicName']}</td>
+		<td><audio src="{$value['mp3Src']}"   controls></audio></td>
+		<td>{$singerList['singerName']}</td>
+		<td>
+			<a href="{:url('music/edit',['id'=>$value['musicID']])}" class="btn btn-success">修改歌曲</a>
+			<a href="{:url('music/delete',['id'=>$value['musicID']])}" class="btn btn-danger" >删除歌曲</a>
+		</td>
+
+	</tr>
+	{/foreach}
+</table>
+
+{include file="public/footer"}

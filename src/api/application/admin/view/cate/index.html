@@ -1,0 +1,58 @@
+{include file="public/header"}
+<div class="container">
+<h2>分类列表管理</h2>
+<!-- {:url('add')}  跳转至当前应用下的当前控制器里面的add操作
+{:url('cate/add')}  跳转至当前应用下的cate控制器里面的add操作
+{:url('应用名称/控制器/操作')}  跳转至指定的应用下的cate控制器里面的add操作 -->
+<div class="row">
+  <div class="col-md-4">
+  	<a href="{:url('goods/index')}" class="btn btn-success">返回商品列表</a>
+	<a href="{:url('add')}" class="btn btn-success">添加分类</a>
+	<a href="{:url('collectcate')}" class="btn btn-primary">采集分类</a>
+  </div>
+  <div class="col-md-7 pull-right">
+  	<form action="{:url('index')}">
+  		<div class="form-group">
+		   <!--  <input type="text" class="form-control" name="keyword" style="width:60%;display: inline-block;"> -->
+		    <select name="cateID" class="form-control" style="width:20%;display: inline-block;" id="searchcate">
+		    	<option>请选择</option>
+		    </select>
+		    <input type="submit" name="" value="搜索" class="btn btn-info" style="display: inline-block;" id="search">
+		  </div>
+  	</form>
+  </div>
+</div>
+
+<!-- <a href="{:url('index/cartnoon/index')}" class="btn btn-success">是浏览漫画api</a>
+ -->
+ <!-- <script type="text/javascript">
+ 	$('#searchcate').change(function(){
+ 		$('#search').click();
+ 	});
+ </script> -->
+<table class="table">
+	<tr>
+		<th>ID</th>
+		<th>歌曲名称</th>
+		<th>分类海报</th>
+		<th>操作</th>
+	</tr>
+
+
+	{foreach $cateList as $item}
+	<tr>
+		<td>{$item.cateID}</td>
+		<td>{$item['cateName']}</td>
+		<td><img src="{$item['cateImg']}" style="width:100px;"></img></td>
+		<td>
+		<a href="{:url('song',['id'=>$item['cateID']])}" class="btn btn-primary">歌曲</a>
+		<a href="{:url('collectgoods',['id'=>$item['cateID']])}" class="btn btn-primary">采集商品
+		</a>
+			<a href="{:url('edit',['id'=>$item['cateID']])}" class="btn btn-success">修改分类</a>
+			<a href="{:url('delete',['id'=>$item['cateID']])}" class="btn btn-danger" >删除分类</a>
+		</td>
+	</tr>
+	{/foreach}
+</table>
+{$cateList->render()}
+{include file="public/footer"}

@@ -1,0 +1,63 @@
+{include file="public/header"}
+<div class="container">
+<h2>商品列表管理</h2>
+<!-- {:url('add')}  跳转至当前应用下的当前控制器里面的add操作
+{:url('goods/add')}  跳转至当前应用下的goods控制器里面的add操作
+{:url('应用名称/控制器/操作')}  跳转至指定的应用下的goods控制器里面的add操作 -->
+<div class="row">
+  <div class="col-md-3">
+  	<a href="{:url('add')}" class="btn btn-success">添加商品</a>
+	<a href="{:url('cate/add')}" class="btn btn-success">添加分类</a>
+	<a href="{:url('cate/index')}" class="btn btn-success">分类列表</a>
+  </div>
+  <div class="col-md-7 pull-right">
+  	<form action="{:url('index')}">
+  		<div class="form-group">
+		    <input type="text" class="form-control" name="keyword" style="width:60%;display: inline-block;">
+		    <select name="cateID" class="form-control" style="width:20%;display: inline-block;" id="searchcate">
+		    	<option value="">请选择</option>
+		    	{foreach $cateList as $item}
+		    	<option value="$item.cateID">{$item.cateName}</option>
+		    	{/foreach}
+		    </select>
+		    <input type="submit" name="" value="搜索" class="btn btn-info" style="display: inline-block;" id="search">
+		  </div>
+  	</form>
+  </div>
+</div>
+<!-- <a href="{:url('index/cartnoon/index')}" class="btn btn-success">是浏览漫画api</a>
+ -->
+ <script type="text/javascript">
+ 	$('#searchcate').change(function(){
+ 		$('#search').click();
+ 	});
+ </script>
+<table class="table">
+	<tr>
+		<th>ID</th>
+		<th>商品名称</th>
+		<th>介绍</th>
+		<th>分类</th>
+		<th>操作</th>
+	</tr>
+
+
+	{foreach $goodsList as $item}
+	<tr>
+		<td>{$item.goodsID}</td>
+		<td>{$item['goodsName']}</td>
+		<td>{$item['introduce']}</audio></td>
+	
+ 		<!-- <td>
+ 			<embed src="http://www.xiami.com/widget/0_{$item['songID']}/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"></embed>
+ 		</td> -->
+ 		<td>{$item['cateID']}</td>
+		<td>
+			<a href="{:url('edit',['id'=>$item['goodsID']])}" class="btn btn-success">修改商品</a>
+			<a href="{:url('delete',['id'=>$item['goodsID']])}" class="btn btn-danger" >删除商品</a>
+		</td>
+	</tr>
+	{/foreach}
+</table>
+{$goodsList->render()}
+{include file="public/footer"}

@@ -1,0 +1,42 @@
+{include file="public/header"}
+<div class="container">
+	<h2>修改分类表单</h2>
+	<form action="{:url('update')}" enctype="multipart/form-data" method="post">
+		<div class="form-group">
+			<label for="">分类名称</label>
+			<input type="text" class="form-control" name="singerName" value='{$singerList['singerName']}'>
+		</div>
+		<div class="form-group">
+			<label for="">分类昵称</label>
+			<input type="text" class="form-control" name="nickName" value='{$singerList['nickName']}'>
+		</div>
+		<div class="form-group">
+		<label for="">分类类型</label>
+		<select name="cateID" >
+			<!-- <option value="">请选择</option> -->
+			{foreach $cateList as $item}
+			<option {if condition="$singerList['cateID'] == $item['cateID']" } selected {/if} value="{$item.cateID}">{$item.cateName}</option>
+			{/foreach}
+
+		</select>
+		</div>
+
+		<div class="form-group">
+			<label for="">分类海报</label>
+			<input type="file"  name="singerImg">
+			<input type="hidden"  name="singerImg" value='{$singerList['singerImg']}'>
+		</div>
+		<div class="form-group">
+			<label for="">分类简介</label>
+			<textarea name="introduce" id=""  style="width: 1146px; height: 190px;">{$singerList['introduce']}
+			</textarea>
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn-success btn" value="保存">
+			<input type="hidden"  name="id" value='{$singerList['singerID']}'>
+		</div>
+	</form>
+</div>
+
+
+{include file="public/footer"}
